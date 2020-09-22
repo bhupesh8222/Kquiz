@@ -1,0 +1,4 @@
+html body {
+    background-image: url("./photo.jpg");
+    background-size: cover;
+}
