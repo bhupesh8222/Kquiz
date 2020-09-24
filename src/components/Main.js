@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
-import { Progress } from "reactstrap";
+import { Progress, Button } from "reactstrap";
+import DisplayQuestion from "./DisplayQuestion";
+import { questions } from "../question";
 
 function Timer(props) {
   let { time } = props;
@@ -14,6 +16,8 @@ function Timer(props) {
 }
 function Main(props) {
   const [time, setTime] = useState(100);
+  const [pointer, setPointer] = useState(0);
+
   useEffect(() => {
     if (time > 0) {
       setTimeout(() => {
@@ -21,9 +25,30 @@ function Main(props) {
       }, 1000);
     }
   }, [time]);
+
   return (
     <div className="container">
       <Timer time={time} />
+      <br></br>
+      <br></br>
+      <DisplayQuestion questions={questions[pointer]} />
+      <div className="d-flex justify-content-around">
+        <Button
+          onClick={() => setPointer(pointer - 1)}
+          color="success"
+          disabled={pointer == 0 ? true : false}
+        >
+          Previous
+        </Button>
+        <Button
+          onClick={() => setPointer(pointer + 1)}
+          color="success"
+          disabled={pointer == questions.length - 1 ? true : false}
+        >
+          Next
+        </Button>
+      </div>
+      <Button color="success">Submit Quiz</Button>
     </div>
   );
 }
