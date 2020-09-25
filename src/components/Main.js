@@ -29,11 +29,20 @@ function Main(props) {
     [pointer]
   );
 
-  const submitHandler = () => {
+  const finishQuiz = () => {
     setActive(false);
+    let score = 0;
+    for (let index = 0; index < questions.length; index = index + 1) {
+      if (selected[index] == questions[index].correct) score += 1;
+    }
+    alert("You got " + score + " correct answers");
   };
+
   useEffect(() => {
-    if (time > 0) {
+    if (time === 0) {
+      finishQuiz();
+    }
+    if (time > 0 && active) {
       setTimeout(() => {
         setTime(time - 1);
       }, 1000);
@@ -67,7 +76,7 @@ function Main(props) {
           Next
         </Button>
       </div>
-      <Button onClick={submitHandler} color="success">
+      <Button onClick={() => finishQuiz()} color="success">
         Submit Quiz
       </Button>
 
