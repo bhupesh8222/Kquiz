@@ -14,7 +14,7 @@ function Timer(props) {
     </div>
   );
 }
-function Main(props) {
+function Main() {
   const [time, setTime] = useState(100);
   const [pointer, setPointer] = useState(0);
   const [active, setActive] = useState(true);
