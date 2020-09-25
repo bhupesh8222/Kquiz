@@ -60,6 +60,7 @@ function Main() {
         userChoice={selected[pointer]}
         setUserChoice={setUserChoice}
       />
+      <br></br>
       <div className="d-flex justify-content-around">
         <Button
           onClick={() => setPointer(pointer - 1)}

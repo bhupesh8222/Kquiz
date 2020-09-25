@@ -14,7 +14,7 @@ function App() {
           <Route path="/quiz">
             <Main />
           </Route>
-          <Route path="/home">
+          <Route path="/">
             <Home />
           </Route>
         </Switch>

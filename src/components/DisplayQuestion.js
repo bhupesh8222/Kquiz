@@ -3,12 +3,12 @@ import { Form, FormGroup, Label, Input } from "reactstrap";
 
 function DisplayQuestion(props) {
   let { questions, pointer, userChoice, setUserChoice } = props;
-  console.log("DisplayQuestion");
   return (
     <div>
       <h2>
         {pointer + 1}. {questions.question}
       </h2>
+      <br></br>
       {questions.choices.map((choice, i) => {
         return (
           <Form key={i.toString()} className="text-center">
@@ -22,7 +22,7 @@ function DisplayQuestion(props) {
                     setUserChoice(i + 1, pointer);
                   }}
                 />
-                {choice}
+                <b>{choice}</b>
               </Label>
             </FormGroup>
           </Form>
