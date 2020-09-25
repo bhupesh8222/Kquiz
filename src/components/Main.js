@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from "react";
-import { Progress, Button } from "reactstrap";
+import React, { useState, useEffect, useCallback } from "react";
+import { Progress, Button, Alert } from "reactstrap";
 import DisplayQuestion from "./DisplayQuestion";
 import { questions } from "../question";
 
@@ -17,7 +17,21 @@ function Timer(props) {
 function Main(props) {
   const [time, setTime] = useState(100);
   const [pointer, setPointer] = useState(0);
+  const [active, setActive] = useState(true);
+  const [selected, setSelected] = useState([null, null, null, null, null]);
 
+  const setUserChoice = useCallback(
+    (choice, index) => {
+      let temp = selected;
+      temp[index] = choice;
+      setSelected(temp);
+    },
+    [pointer]
+  );
+
+  const submitHandler = () => {
+    setActive(false);
+  };
   useEffect(() => {
     if (time > 0) {
       setTimeout(() => {
@@ -31,7 +45,12 @@ function Main(props) {
       <Timer time={time} />
       <br></br>
       <br></br>
-      <DisplayQuestion questions={questions[pointer]} />
+      <DisplayQuestion
+        questions={questions[pointer]}
+        pointer={pointer}
+        userChoice={selected[pointer]}
+        setUserChoice={setUserChoice}
+      />
       <div className="d-flex justify-content-around">
         <Button
           onClick={() => setPointer(pointer - 1)}
@@ -48,7 +67,24 @@ function Main(props) {
           Next
         </Button>
       </div>
-      <Button color="success">Submit Quiz</Button>
+      <Button onClick={submitHandler} color="success">
+        Submit Quiz
+      </Button>
+
+      {!active ? (
+        <div>
+          <br></br>
+          <Alert color="warning">
+            <b>Correct Answer : </b>
+            {questions[pointer].correct}
+            <br></br>
+            <b>Explanation : </b>
+            {questions[pointer].description}
+          </Alert>
+        </div>
+      ) : (
+        ""
+      )}
     </div>
   );
 }

@@ -23,7 +23,7 @@ let tempquestions = [
     question: "Which city is capital of Uttarkhand",
     choices: ["Bageshwar", "Dehradun", "Haldwani", "Kotdwar"],
     correct: 2,
-    description: "Delhi is the capitall of India",
+    description: "Dehradun ",
   },
   {
     question: "After what interval, elections of LokSabha takes place",
